@@ -23,6 +23,8 @@ in {
       vscode
       rectangle
       discord
+      colima
+      docker
     ];
 
     home.file.".p10k.zsh".source = ./home/theme/.p10k.zsh;
