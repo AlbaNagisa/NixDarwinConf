@@ -59,6 +59,7 @@ in
 
     launchd.agents = {
       rectangle = import ./home/launchd/rectangle.nix { inherit config pkgs; };
+      musicpresence = import ./home/launchd/musicpresence.nix { inherit config pkgs; };
       # docker = import ./home/launchd/docker.nix { inherit config pkgs; };
     };
   };

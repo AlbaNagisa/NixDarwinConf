@@ -16,12 +16,6 @@
     nerd-fonts.jetbrains-mono
   ];
 
-  nixpkgs.config.allowUnfree = true;
-
-  nixpkgs.config.packageOverrides = pkgs: {
-    musicpresence = pkgs.callPackage ./home/custom-pkgs/musicpresence.nix { };
-  };
-
   nix.settings.experimental-features = [
     "nix-command"
     "flakes"

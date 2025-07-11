@@ -10,18 +10,48 @@
 
   };
 
-  outputs = inputs@{ self, nixpkgs, nix-darwin, home-manager, ... }: {
-    darwinConfigurations.default = nix-darwin.lib.darwinSystem {
-      modules = [ ./darwin/default.nix ./home-manager.nix ];
-      specialArgs = {
-        inherit inputs self;
-        user = {
-          name = "alban";
-          home = "/Users/alban";
+  outputs =
+    inputs@{
+      self,
+      nixpkgs,
+      nix-darwin,
+      home-manager,
+      ...
+    }:
+    let
+      system = "aarch64-darwin";
+
+      overlay = final: prev: {
+        musicpresence = prev.callPackage ./home/custom-pkgs/musicpresence.nix { };
+      };
+
+      pkgs = import nixpkgs {
+        inherit system;
+        overlays = [ overlay ];
+        config = {
+          allowUnfree = true;
         };
       };
-    };
+    in
+    {
+      darwinConfigurations.default = nix-darwin.lib.darwinSystem {
+        modules = [
+          ./darwin/default.nix
+          ./home-manager.nix
+          {
+            nixpkgs.overlays = [ overlay ];
+            nixpkgs.hostPlatform = system;
+          }
+        ];
+        specialArgs = {
+          inherit inputs self pkgs;
+          user = {
+            name = "alban";
+            home = "/Users/alban";
+          };
+        };
+      };
 
-    darwinPackages = self.darwinConfigurations.default.pkgs;
-  };
+      darwinPackages = pkgs;
+    };
 }
