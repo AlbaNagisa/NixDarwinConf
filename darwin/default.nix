@@ -1,12 +1,31 @@
-{ config, pkgs, user, ... }: {
+{
+  config,
+  pkgs,
+  user,
+  ...
+}:
+{
 
-  environment.systemPackages = with pkgs; [ nixfmt-classic ];
+  environment.systemPackages = with pkgs; [
+    nixfmt-classic
+    nil
+  ];
 
-  fonts.packages = with pkgs; [ nerd-fonts.meslo-lg nerd-fonts.jetbrains-mono ];
+  fonts.packages = with pkgs; [
+    nerd-fonts.meslo-lg
+    nerd-fonts.jetbrains-mono
+  ];
 
   nixpkgs.config.allowUnfree = true;
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nixpkgs.config.packageOverrides = pkgs: {
+    musicpresence = pkgs.callPackage ./home/custom-pkgs/musicpresence.nix { };
+  };
+
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
 
   users.users.alban = {
     name = user.name;

@@ -8,7 +8,6 @@
     vscode-extensions.pkief.material-icon-theme
     vscode-extensions.esbenp.prettier-vscode
     vscode-extensions.dbaeumer.vscode-eslint
-    vscode-extensions.christian-kohler.npm-intellisense
     #vscode-extensions.dsznajder.es7-react-js-snippets
   ];
 
@@ -20,5 +19,9 @@
     # Icon
     "workbench.iconTheme" = "material-icon-theme";
     "material-icon-theme.activeIconPack" = "react";
+
+    # Nix
+    "nix.enableLanguageServer" = true;
+    "nix.serverPath" = "nil";
   };
 }

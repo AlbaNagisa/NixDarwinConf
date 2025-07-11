@@ -1,9 +1,17 @@
-{ inputs, config, user, pkgs, lib, ... }:
+{
+  inputs,
+  config,
+  user,
+  pkgs,
+  lib,
+  ...
+}:
 
 let
   username = user.name;
   homeDir = user.home;
-in {
+in
+{
   imports = [ inputs.home-manager.darwinModules.home-manager ];
 
   home-manager.useGlobalPkgs = true;
@@ -25,12 +33,26 @@ in {
       discord
       colima
       docker
+      musicpresence
     ];
 
     programs = {
-      zsh = import ./home/programs/zsh.nix { inherit config pkgs lib user; };
-      vscode =
-        import ./home/programs/vscode.nix { inherit config pkgs lib user; };
+      zsh = import ./home/programs/zsh.nix {
+        inherit
+          config
+          pkgs
+          lib
+          user
+          ;
+      };
+      vscode = import ./home/programs/vscode.nix {
+        inherit
+          config
+          pkgs
+          lib
+          user
+          ;
+      };
     };
 
     home.file.".p10k.zsh".source = ./home/theme/.p10k.zsh;
