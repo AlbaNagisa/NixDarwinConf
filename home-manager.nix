@@ -11,7 +11,7 @@ in {
   home-manager.verbose = true;
 
   home-manager.users.${username} = {
-    imports = [ ./macos-apps-fix.nix ./home/programs/zsh.nix ];
+    imports = [ ./macos-apps-fix.nix ];
 
     home.stateVersion = "25.05";
     home.packages = with pkgs; [
@@ -26,6 +26,12 @@ in {
       colima
       docker
     ];
+
+    programs = {
+      zsh = import ./home/programs/zsh.nix { inherit config pkgs lib user; };
+      vscode =
+        import ./home/programs/vscode.nix { inherit config pkgs lib user; };
+    };
 
     home.file.".p10k.zsh".source = ./home/theme/.p10k.zsh;
 
