@@ -1,4 +1,8 @@
-{ config, pkgs, lib, user, ... }:
+{
+  pkgs,
+  user,
+  ...
+}:
 
 {
   enable = true;
@@ -10,7 +14,12 @@
 
   oh-my-zsh = {
     enable = true;
-    plugins = [ "sudo" "git" "z" "colored-man-pages" ];
+    plugins = [
+      "sudo"
+      "git"
+      "z"
+      "colored-man-pages"
+    ];
     custom = "${user.home}/.oh-my-zsh/custom";
   };
 
@@ -20,6 +29,5 @@
 
     # Charger config si elle existe
     [[ -f "${user.home}/.p10k.zsh" ]] && source "${user.home}/.p10k.zsh"
-
   '';
 }

@@ -1,4 +1,7 @@
-{ config, pkgs, lib, user, ... }:
+{
+  pkgs,
+  ...
+}:
 
 {
   enable = true;
@@ -8,6 +11,8 @@
     vscode-extensions.pkief.material-icon-theme
     vscode-extensions.esbenp.prettier-vscode
     vscode-extensions.dbaeumer.vscode-eslint
+    vscode-extensions.christian-kohler.path-intellisense
+    vscode-extensions.christian-kohler.npm-intellisense
     #vscode-extensions.dsznajder.es7-react-js-snippets
   ];
 
@@ -22,6 +27,6 @@
 
     # Nix
     "nix.enableLanguageServer" = true;
-    "nix.serverPath" = "nil";
+    "nix.serverPath" = "nixd";
   };
 }

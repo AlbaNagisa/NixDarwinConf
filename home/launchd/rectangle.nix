@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
 {
   enable = true;
@@ -6,8 +6,11 @@
     Label = "dev.alban.Rectangle";
     RunAtLoad = true;
     KeepAlive = false;
-    ProgramArguments =
-      [ "/usr/bin/open" "-a" "${pkgs.rectangle}/Applications/Rectangle.app" ];
+    ProgramArguments = [
+      "/usr/bin/open"
+      "-a"
+      "${pkgs.rectangle}/Applications/Rectangle.app"
+    ];
     StandardOutPath = "/dev/null";
     StandardErrorPath = "/dev/null";
   };

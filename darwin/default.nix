@@ -7,8 +7,8 @@
 {
 
   environment.systemPackages = with pkgs; [
-    nixfmt-classic
-    nil
+    nixfmt-rfc-style
+    nixd
   ];
 
   fonts.packages = with pkgs; [
